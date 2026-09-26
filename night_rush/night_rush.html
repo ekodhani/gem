@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>NIGHT RUSH — Multiplayer Online</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
@@ -181,12 +181,10 @@ canvas{display:block}
 #ghostBadge{position:fixed;top:60px;right:150px;font-size:10px;color:#c4a8ff;letter-spacing:2px;z-index:10;pointer-events:none;opacity:0;background:rgba(0,0,0,.5);padding:5px 10px;border-radius:6px;border:1px solid rgba(180,140,255,.4);transition:opacity .3s}
 #ghostBadge.on{opacity:1}
 #qualityRow{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;width:100%;margin-top:4px}
-/* ===== CAR PREVIEW 360 ===== */
 #carPreviewWrap{position:relative;width:100%;max-width:640px;height:300px;background:radial-gradient(ellipse at 50% 75%,rgba(30,50,100,.55),rgba(0,0,0,.75));border:1px solid rgba(120,190,255,.35);border-radius:10px;overflow:hidden;cursor:grab;margin-bottom:10px;touch-action:none}
 #carPreviewWrap.grabbing{cursor:grabbing}
 #carPreviewCanvas{display:block;width:100%;height:100%}
 #carPreviewHint{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);font-size:9px;color:#8fd0ff;opacity:.7;letter-spacing:2px;pointer-events:none;white-space:nowrap;font-family:'Orbitron',monospace}
-/* ===== REPLAY ===== */
 #replayFade{position:fixed;inset:0;background:#000;z-index:35;opacity:0;pointer-events:none;transition:opacity .4s ease}
 #replayFade.on{opacity:1}
 #replayBadge{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:34;background:rgba(255,40,40,.9);color:#fff;font-weight:900;font-size:14px;letter-spacing:4px;padding:6px 22px;border-radius:8px;box-shadow:0 0 24px rgba(255,50,50,.75);font-family:'Orbitron',monospace;display:none;align-items:center}
@@ -213,6 +211,89 @@ body.replaying #hiscore,body.replaying #scoreBox,body.replaying #comboBox,body.r
 #loadingFill{height:100%;width:0%;background:linear-gradient(90deg,#1e5cff,#54e0ff,#bff6ff);transition:width .35s ease;box-shadow:0 0 12px rgba(84,224,255,.7)}
 #loadingText{font-size:11px;letter-spacing:4px;color:#8fd0ff;opacity:.85;font-weight:700;min-height:16px}
 #loadingSub{font-size:10px;letter-spacing:2px;color:#8fd0ff;opacity:.5;font-style:italic}
+
+/* ============ MOBILE ENHANCEMENTS ============ */
+html,body{overscroll-behavior:none}
+@media (pointer:coarse){
+  #hiscore{left:calc(14px + env(safe-area-inset-left))!important;top:calc(14px + env(safe-area-inset-top))!important;font-size:10px!important}
+  #scoreBox{top:calc(10px + env(safe-area-inset-top))!important;right:calc(14px + env(safe-area-inset-right))!important}
+  #score{font-size:22px!important}
+  #speedBox{bottom:calc(180px + env(safe-area-inset-bottom))!important;right:calc(16px + env(safe-area-inset-right))!important}
+  #speed{font-size:38px!important}
+  #nitroWrap{left:calc(14px + env(safe-area-inset-left))!important;bottom:calc(180px + env(safe-area-inset-bottom))!important;width:130px!important}
+  #minimapWrap{width:150px!important;height:60px!important;bottom:calc(170px + env(safe-area-inset-bottom))!important;left:calc(14px + env(safe-area-inset-left))!important}
+  #progWrap{width:min(300px,60vw)!important;top:calc(10px + env(safe-area-inset-top))!important}
+  #progLabel{font-size:9px!important}
+  #lapBox{top:calc(78px + env(safe-area-inset-top))!important;min-width:140px!important;padding:5px 14px!important}
+  #lapNum{font-size:12px!important}
+  #lapTime{font-size:17px!important}
+  #comboBox{top:calc(50px + env(safe-area-inset-top))!important;right:calc(14px + env(safe-area-inset-right))!important}
+  #powerupHUD{right:calc(10px + env(safe-area-inset-right))!important}
+  .puBadge{padding:6px 10px!important;font-size:11px!important}
+  #camMode,#weatherBadge,#ghostBadge{font-size:9px!important;padding:3px 8px!important}
+  #camMode{top:calc(50px + env(safe-area-inset-top))!important;left:calc(14px + env(safe-area-inset-left))!important}
+  #weatherBadge{top:calc(50px + env(safe-area-inset-top))!important;right:calc(14px + env(safe-area-inset-right))!important}
+  #ghostBadge{top:calc(78px + env(safe-area-inset-top))!important;right:calc(14px + env(safe-area-inset-right))!important}
+  #trackNameHUD{top:calc(110px + env(safe-area-inset-top))!important;font-size:9px!important}
+  #careerTarget{top:calc(10px + env(safe-area-inset-top))!important;margin-top:52px!important;font-size:10px!important}
+  #bgmToggle{top:auto!important;bottom:calc(14px + env(safe-area-inset-bottom))!important;right:calc(14px + env(safe-area-inset-right))!important;padding:6px 10px!important;font-size:12px!important;z-index:50}
+  #fpsHud{top:auto!important;bottom:calc(60px + env(safe-area-inset-bottom))!important;left:calc(14px + env(safe-area-inset-left))!important;font-size:9px!important}
+  #airHint{bottom:calc(250px + env(safe-area-inset-bottom))!important;font-size:11px!important;padding:6px 14px!important}
+  .card,.trackCard,.carCard,.lobbyBtn,.stageBtn{padding:12px 16px!important}
+  .carCard,.trackCard{min-width:110px!important}
+  .lobbyInput{padding:14px 18px!important}
+  .lobbyBtn{padding:14px 24px!important;font-size:13px!important}
+  #carPreviewWrap{height:230px!important}
+}
+button,.lobbyBtn,.card,.trackCard,.carCard,.touchBtn,#steerLeft,#steerRight,
+#camBtn,#pauseBtn,#bgmToggle,.rpBtn{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+#carPreviewCanvas,#carPreviewWrap,#minimapCanvas{touch-action:none}
+
+#steerLeft,#steerRight,#camBtn,#pauseBtn{
+  display:none;position:fixed;z-index:14;
+  align-items:center;justify-content:center;
+  background:radial-gradient(circle at 35% 30%,rgba(90,180,255,.55),rgba(10,30,80,.82));
+  border:2px solid rgba(140,220,255,.85);border-radius:50%;
+  color:#fff;font-family:'Orbitron',monospace;font-weight:900;
+  user-select:none;-webkit-user-select:none;touch-action:none;
+  box-shadow:0 0 20px rgba(70,170,255,.55);
+  cursor:pointer;transition:transform .08s,background .08s,box-shadow .08s;
+  padding:0;margin:0;
+}
+#steerLeft,#steerRight{width:90px;height:90px;font-size:36px;line-height:1}
+#steerLeft{left:calc(18px + env(safe-area-inset-left));bottom:calc(28px + env(safe-area-inset-bottom))}
+#steerRight{left:calc(122px + env(safe-area-inset-left));bottom:calc(28px + env(safe-area-inset-bottom))}
+#camBtn,#pauseBtn{width:56px;height:56px;font-size:18px}
+#camBtn{top:calc(14px + env(safe-area-inset-top));right:calc(82px + env(safe-area-inset-right))}
+#pauseBtn{top:calc(14px + env(safe-area-inset-top));right:calc(14px + env(safe-area-inset-right))}
+#steerLeft.active,#steerRight.active,#camBtn.active,#pauseBtn.active{
+  transform:scale(0.9);
+  background:radial-gradient(circle at 35% 30%,rgba(140,220,255,.85),rgba(30,90,180,.95));
+  box-shadow:0 0 26px rgba(84,224,255,.9)}
+body.in-race #steerLeft,
+body.in-race #steerRight,
+body.in-race #camBtn,
+body.in-race #pauseBtn{display:flex}
+@media (pointer:coarse){
+  #driftBtn{right:calc(18px + env(safe-area-inset-right))!important;left:auto!important;bottom:calc(120px + env(safe-area-inset-bottom))!important;width:82px!important;height:82px!important}
+  #nitroBtn{right:calc(18px + env(safe-area-inset-right))!important;left:auto!important;bottom:calc(28px + env(safe-area-inset-bottom))!important;width:82px!important;height:82px!important}
+  #hornBtn{right:calc(108px + env(safe-area-inset-right))!important;left:auto!important;bottom:calc(120px + env(safe-area-inset-bottom))!important;width:64px!important;height:64px!important;font-size:20px!important}
+}
+
+#orientationHint{position:fixed;inset:0;z-index:200;display:none;
+  flex-direction:column;align-items:center;justify-content:center;gap:20px;
+  background:radial-gradient(ellipse at center,rgba(20,35,90,.98),rgba(4,6,16,1));
+  color:#fff;text-align:center;padding:30px;font-family:'Orbitron',monospace}
+#orientationHint.on{display:flex}
+#orientationHint .icon{font-size:76px;display:inline-block;animation:rotHint 2.4s ease-in-out infinite}
+@keyframes rotHint{0%,35%{transform:rotate(0deg)}55%,100%{transform:rotate(90deg)}}
+#orientationHint h2{font-size:22px;font-weight:900;letter-spacing:3px;font-style:italic;
+  background:linear-gradient(100deg,#ffd25e,#ff7847,#ff3d81);
+  -webkit-background-clip:text;background-clip:text;color:transparent;margin:0}
+#orientationHint p{font-size:13px;opacity:.75;max-width:340px;line-height:1.75;margin:0}
+#orientationHint button{margin-top:14px;padding:12px 26px;font-family:inherit;font-weight:900;
+  font-size:12px;letter-spacing:2px;color:#fff;border:none;border-radius:999px;
+  background:linear-gradient(120deg,#1e5cff,#54e0ff);cursor:pointer}
 </style>
 </head>
 <body>
@@ -298,6 +379,18 @@ body.replaying #hiscore,body.replaying #scoreBox,body.replaying #comboBox,body.r
     </div>
   </div>
 </div>
+
+<!-- MOBILE TOUCH CONTROLS -->
+<div id="orientationHint">
+  <div class="icon">📱</div>
+  <h2>PUTAR HP KE LANDSCAPE</h2>
+  <p>Game ini lebih enak dimainkan dengan HP dalam posisi horizontal (miring 90°).</p>
+  <button id="orientationSkip">LANJUT AJA</button>
+</div>
+<div id="steerLeft" aria-label="Kiri"><span>◀</span></div>
+<div id="steerRight" aria-label="Kanan"><span>▶</span></div>
+<button id="camBtn" aria-label="Kamera">📷</button>
+<button id="pauseBtn" aria-label="Pause">⏸</button>
 
 <div id="replayFade"></div>
 <div id="replayBadge">REPLAY</div>
@@ -392,7 +485,7 @@ body.replaying #hiscore,body.replaying #scoreBox,body.replaying #comboBox,body.r
   </div>
 
   <div id="lobbyStatus"></div>
-  <div id="credit">Model: "Classic Muscle Car" by Alexus16 (CC-BY) • Dino: custom local • Engine: Three.js + PeerJS</div>
+  <div id="credit">Model: "Classic Muscle Car" by Alexus16 (CC-BY) · Dino: custom local · Engine: Three.js + PeerJS</div>
 </div>
 
 <div id="endScreen">
@@ -424,7 +517,6 @@ import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
 import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
 import {OutputPass} from 'three/addons/postprocessing/OutputPass.js';
 
-/* ========= LOADING UI ========= */
 const _loadingFill=document.getElementById('loadingFill');
 const _loadingText=document.getElementById('loadingText');
 const _loadingOverlay=document.getElementById('loadingOverlay');
@@ -434,7 +526,6 @@ function setLoading(pct,text){
 }
 setLoading(5,'INISIALISASI...');
 
-/* ========= TUNING ========= */
 const TUNING={
   nitroDrainPerSec:20,
   nitroRegenPerSec:5,
@@ -452,7 +543,6 @@ const TUNING={
   skidLife:5.0,
 };
 
-/* ========= DEVICE DETECTION ========= */
 const IS_MOBILE=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
 const IS_TOUCH=('ontouchstart' in window)||(navigator.maxTouchPoints>0)||matchMedia('(pointer:coarse)').matches;
 const CPU_CORES=navigator.hardwareConcurrency||4;
@@ -1134,7 +1224,7 @@ try{
   wheelG=results[1];
   dinoG=results[2];
   if(!chassisG||!wheelG)useFallback=true;
-  if(!dinoG)console.warn('⚠️ dino.glb gak ke-load — dino bakal pakai fallback box. Cek path ./models/dino.glb & pastikan server jalan (bukan file://)');
+  if(!dinoG)console.warn('⚠️ dino.glb gak ke-load — dino bakal pakai fallback box.');
 }catch(e){console.warn('GLB load failed',e);useFallback=true;}
 const WHEEL_R=0.38,WHEEL_SCALE=WHEEL_R/0.34;
 
@@ -1206,7 +1296,6 @@ function buildDino(paint){
     dino.position.set(-center1.x,-box1.min.y+DINO_Y_OFFSET,-center1.z);
     dino.rotation.y=DINO_ROT_Y;
     roller.add(dino);
-    console.log('🦖 Dino loaded. size raw:',size0.x.toFixed(2),size0.y.toFixed(2),size0.z.toFixed(2),'→ scale',scale.toFixed(3));
   }else{
     const mat=new THREE.MeshStandardMaterial({color:paint,metalness:0.3,roughness:0.6});
     const body=new THREE.Mesh(new THREE.BoxGeometry(1.4,1.0,3.6),mat);
@@ -1641,7 +1730,6 @@ const knockdownFx={
   returnFired:false,
 };
 
-/* ========= REPLAY ========= */
 const replay={
   frames:[],
   active:false,
@@ -1798,10 +1886,75 @@ addEventListener('keydown',e=>{
 });
 addEventListener('keyup',e=>on(e,false));
 
-let touchX0=null,touchSteer=0;
-addEventListener('touchstart',e=>{touchX0=e.touches[0].clientX;},{passive:true});
-addEventListener('touchmove',e=>{if(touchX0!==null)touchSteer=(e.touches[0].clientX-touchX0)/innerWidth*8;},{passive:true});
-addEventListener('touchend',()=>{touchX0=null;touchSteer=0;});
+/* ===== MOBILE STEERING + HAPTIC ===== */
+let touchSteer=0;
+let mobileSteerLeft=false,mobileSteerRight=false;
+function haptic(ms){try{if(navigator.vibrate)navigator.vibrate(ms);}catch(e){}}
+function bindHoldButton(el,onDown,onUp){
+  if(!el)return;
+  let active=false;
+  const down=(e)=>{e.preventDefault();e.stopPropagation();if(active)return;active=true;
+    el.classList.add('active');haptic(10);if(onDown)onDown();};
+  const up=(e)=>{if(e){e.preventDefault();e.stopPropagation();}if(!active)return;active=false;
+    el.classList.remove('active');if(onUp)onUp();};
+  el.addEventListener('pointerdown',down);
+  el.addEventListener('pointerup',up);
+  el.addEventListener('pointercancel',up);
+  el.addEventListener('pointerleave',up);
+  el.addEventListener('lostpointercapture',up);
+  el.addEventListener('contextmenu',e=>e.preventDefault());
+}
+bindHoldButton(document.getElementById('steerLeft'),
+  ()=>{mobileSteerLeft=true;},()=>{mobileSteerLeft=false;});
+bindHoldButton(document.getElementById('steerRight'),
+  ()=>{mobileSteerRight=true;},()=>{mobileSteerRight=false;});
+
+const camBtnEl=document.getElementById('camBtn');
+const pauseBtnEl=document.getElementById('pauseBtn');
+if(camBtnEl){
+  camBtnEl.addEventListener('pointerdown',e=>{
+    e.preventDefault();e.stopPropagation();
+    camBtnEl.classList.add('active');haptic(10);
+    if(gameState==='playing')cycleCamera();
+  });
+  ['pointerup','pointercancel','pointerleave'].forEach(ev=>
+    camBtnEl.addEventListener(ev,()=>camBtnEl.classList.remove('active')));
+}
+if(pauseBtnEl){
+  pauseBtnEl.addEventListener('pointerdown',e=>{
+    e.preventDefault();e.stopPropagation();
+    pauseBtnEl.classList.add('active');haptic(10);
+    if(gameState==='playing'||gameState==='paused')togglePause();
+  });
+  ['pointerup','pointercancel','pointerleave'].forEach(ev=>
+    pauseBtnEl.addEventListener(ev,()=>pauseBtnEl.classList.remove('active')));
+}
+
+const orientHint=document.getElementById('orientationHint');
+const orientSkip=document.getElementById('orientationSkip');
+let orientationSkipPermanent=false;
+if(orientSkip){
+  orientSkip.addEventListener('click',()=>{
+    orientationSkipPermanent=true;
+    if(orientHint)orientHint.classList.remove('on');
+  });
+}
+function checkOrientation(){
+  if(!IS_TOUCH||orientationSkipPermanent){if(orientHint)orientHint.classList.remove('on');return;}
+  const isPortrait=window.innerHeight>window.innerWidth*1.05;
+  const inGame=(gameState==='playing'||gameState==='countdown'||gameState==='cinematic'||gameState==='paused');
+  if(isPortrait&&inGame){
+    if(orientHint)orientHint.classList.add('on');
+  }else{
+    if(orientHint)orientHint.classList.remove('on');
+  }
+}
+addEventListener('resize',checkOrientation);
+addEventListener('orientationchange',()=>setTimeout(checkOrientation,250));
+setTimeout(checkOrientation,800);
+
+document.addEventListener('gesturestart',e=>e.preventDefault());
+document.addEventListener('touchmove',e=>{if(e.touches.length>1)e.preventDefault();},{passive:false});
 
 const nitroBtn=document.getElementById('nitroBtn');
 const driftBtn=document.getElementById('driftBtn');
@@ -2450,6 +2603,7 @@ document.getElementById('btnNextStage').onclick=()=>{
   if(careerStageIdx>=0&&careerStageIdx<CAREER_STAGES.length-1)startCareerStage(careerStageIdx+1);
 };
 document.getElementById('btnBackLobby').onclick=()=>{
+  document.body.classList.remove('in-race');
   endScreen.classList.remove('show');
   lobby.classList.remove('hide');
   gameState='lobby';
@@ -2670,6 +2824,7 @@ function getInterpolatedRemote(rp,now){
 }
 
 function startCareerStage(idx){
+  document.body.classList.add('in-race');
   careerStageIdx=idx;
   const stage=CAREER_STAGES[idx];
   RACE_DISTANCE=stage.distance;
@@ -2738,6 +2893,7 @@ function resetGame(){
   updateHUD();
 }
 function startGame(online){
+  document.body.classList.add('in-race');
   if(!AC){initAudio();}
   if(AC&&AC.state==='suspended')AC.resume();
   RACE_DISTANCE=1500;TOTAL_LAPS=3;
@@ -2870,8 +3026,8 @@ function updateCinematic(now){
   }
 }
 
-/* ========= REPLAY FUNCTIONS ========= */
 function enterReplay(){
+  document.body.classList.remove('in-race');
   gameState='replay';
   replay.active=true;
   replay.time=0;
@@ -3100,6 +3256,7 @@ document.querySelectorAll('#replaySpeed .rpBtn').forEach(b=>{
 
 function showEndScreen(win){
   gameState='finished';
+  document.body.classList.remove('in-race');
   document.getElementById('endTitle').textContent=win?'FINISH!':'GAGAL';
   document.getElementById('endTitle').className=win?'win':'lose';
   document.getElementById('endTime').textContent=formatTime(myFinishTime);
@@ -3232,8 +3389,11 @@ function animate(){
     let input=0;
     if(keys['arrowleft']||keys['a'])input-=1;
     if(keys['arrowright']||keys['d'])input+=1;
+    if(mobileSteerLeft)input-=1;
+    if(mobileSteerRight)input+=1;
     if(Math.abs(touchSteer)>0.05)input+=touchSteer;
     input+=gpInput;
+    input=THREE.MathUtils.clamp(input,-1,1);
     steerTarget+=input*dt*10;
     steerTarget=THREE.MathUtils.clamp(steerTarget,-4.6,4.6);
     steerX=THREE.MathUtils.lerp(steerX,steerTarget,dt*carDef.steerRate*slideMult);
@@ -3367,7 +3527,6 @@ function animate(){
       }
     }
 
-    /* ===== REPLAY RECORDING ===== */
     if(raceTimer - replay.lastRec > 0.05 && replay.frames.length < replay.MAX_FRAMES){
       replay.lastRec = raceTimer;
       replay.frames.push({
