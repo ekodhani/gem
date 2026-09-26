@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Game Q</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0b1a;
+    --card: #1c1733;
+    --line: #322a54;
+    --ink: #f1eefc;
+    --ink-dim: #9b93c2;
+    --accent: #ffd23f;
+    --accent-2: #ff5d73;
+    --accent-3: #3ee0a8;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  * { box-sizing: inherit; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    margin: 0;
+    min-height: 100%;
+    background: var(--bg);
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(255,210,63,0.08), transparent 40%),
+      radial-gradient(circle at 85% 30%, rgba(255,93,115,0.08), transparent 40%);
+    color: var(--ink);
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header {
+    padding: 56px 24px 36px;
+    text-align: center;
+    border-bottom: 1px solid var(--line);
+  }
+  .kicker {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    color: var(--accent-3);
+    margin: 0 0 16px;
+  }
+  h1 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(22px, 6vw, 36px);
+    line-height: 1.5;
+    margin: 0;
+    color: var(--ink);
+    text-shadow: 3px 3px 0 var(--accent-2);
+  }
+
+  main {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 44px 24px 72px;
+  }
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 20px 22px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .card:hover, .card:focus-visible {
+    transform: translateX(4px);
+    border-color: var(--tint, var(--accent));
+  }
+  .card:focus-visible {
+    outline: 2px solid var(--tint, var(--accent));
+    outline-offset: 2px;
+  }
+  .glyph {
+    flex: 0 0 auto;
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background: var(--tint, var(--accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 13px;
+    color: #14101f;
+  }
+  .label {
+    flex: 1 1 auto;
+  }
+  .label h2 {
+    margin: 0 0 4px;
+    font-size: 17px;
+    font-weight: 600;
+  }
+  .label p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--ink-dim);
+  }
+  .go {
+    flex: 0 0 auto;
+    font-size: 12px;
+    color: var(--tint, var(--accent));
+    font-weight: 600;
+  }
+
+  footer {
+    text-align: center;
+    padding: 28px 24px 48px;
+    color: var(--ink-dim);
+    font-size: 13px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card { transition: none; }
+    .card:hover { transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="kicker">PILIH &amp; MAIN</p>
+  <h1>GAME Q</h1>
+</header>
+
+<main>
+  <div class="list">
+
+    <a class="card" style="--tint:#ffd23f" href="./night_rush/night_rush.html">
+      <div class="glyph">A</div>
+      <div class="label">
+        <h2>Asphalt</h2>
+        <p>Versi ringan, cocok buat device lawas.</p>
+      </div>
+      <div class="go">Main →</div>
+    </a>
+
+    <a class="card" style="--tint:#ff5d73" href="./dino_escape/dino_escape.html">
+      <div class="glyph">D</div>
+      <div class="label">
+        <h2>Dino Escape</h2>
+        <p>Versi ringan dari Dead by Daylight.</p>
+      </div>
+      <div class="go">Main →</div>
+    </a>
+
+  </div>
+</main>
+
+<footer>
+  Klik salah satu game di atas untuk mulai main.
+</footer>
+
+</body>
+</html>
