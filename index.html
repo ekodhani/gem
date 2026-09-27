@@ -4,6 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Game Q</title>
+
+<!-- PWA -->
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#0e0b1a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Game Q">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<link rel="icon" href="./icon-192.png" type="image/png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
@@ -127,6 +138,21 @@
     font-size: 13px;
   }
 
+  #installBtn {
+    display: none;
+    margin: 0 auto 8px;
+    padding: 12px 20px;
+    background: var(--accent);
+    color: #14101f;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  #installBtn.show { display: inline-block; }
+
   @media (prefers-reduced-motion: reduce) {
     .card { transition: none; }
     .card:hover { transform: none; }
@@ -141,6 +167,10 @@
 </header>
 
 <main>
+  <div style="text-align:center">
+    <button id="installBtn">⬇ Install Game Q</button>
+  </div>
+
   <div class="list">
 
     <a class="card" style="--tint:#ffd23f" href="./night_rush/night_rush.html">
@@ -167,6 +197,39 @@
 <footer>
   Klik salah satu game di atas untuk mulai main.
 </footer>
+
+<script>
+  // Registrasi service worker biar app shell + game bisa dibuka offline
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch((err) => {
+        console.warn('SW register gagal:', err);
+      });
+    });
+  }
+
+  // Tombol "Install" custom (Android/Chrome) — muncul kalau browser support prompt
+  let deferredPrompt = null;
+  const installBtn = document.getElementById('installBtn');
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    installBtn.classList.add('show');
+  });
+
+  installBtn.addEventListener('click', async () => {
+    if (!deferredPrompt) return;
+    installBtn.classList.remove('show');
+    deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    deferredPrompt = null;
+  });
+
+  window.addEventListener('appinstalled', () => {
+    installBtn.classList.remove('show');
+  });
+</script>
 
 </body>
 </html>
