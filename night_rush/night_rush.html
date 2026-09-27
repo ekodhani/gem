@@ -270,10 +270,11 @@ button,.lobbyBtn,.card,.trackCard,.carCard,.touchBtn,#steerLeft,#steerRight,
   transform:scale(0.9);
   background:radial-gradient(circle at 35% 30%,rgba(140,220,255,.85),rgba(30,90,180,.95));
   box-shadow:0 0 26px rgba(84,224,255,.9)}
-body.in-race #steerLeft,
-body.in-race #steerRight,
-body.in-race #camBtn,
-body.in-race #pauseBtn{display:flex}
+/* FIX: tombol steer/cam/pause hanya muncul di device touch */
+body.in-race.touch-device #steerLeft,
+body.in-race.touch-device #steerRight,
+body.in-race.touch-device #camBtn,
+body.in-race.touch-device #pauseBtn{display:flex}
 @media (pointer:coarse){
   #driftBtn{right:calc(18px + env(safe-area-inset-right))!important;left:auto!important;bottom:calc(120px + env(safe-area-inset-bottom))!important;width:82px!important;height:82px!important}
   #nitroBtn{right:calc(18px + env(safe-area-inset-right))!important;left:auto!important;bottom:calc(28px + env(safe-area-inset-bottom))!important;width:82px!important;height:82px!important}
@@ -545,6 +546,8 @@ const TUNING={
 
 const IS_MOBILE=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
 const IS_TOUCH=('ontouchstart' in window)||(navigator.maxTouchPoints>0)||matchMedia('(pointer:coarse)').matches;
+// FIX: tandai body sebagai touch-device supaya tombol steer/cam/pause cuma muncul di mobile
+if(IS_TOUCH)document.body.classList.add('touch-device');
 const CPU_CORES=navigator.hardwareConcurrency||4;
 const IS_LOW_END=IS_MOBILE&&CPU_CORES<=4;
 let qualityLevel=IS_LOW_END?'low':(IS_MOBILE?'medium':'high');
